@@ -26,5 +26,20 @@ namespace NU.StringCalculatorExercise.Tests
             // Assert
             result.Should().Throw<Exception>();
         }
+
+        [Theory]
+        [InlineData("")]    // No value
+        [InlineData("     ")]    // Spaces should not count as input either
+        public void Should_ReturnZero_When_InputIsBlank(string input)
+        {
+            // Arrange
+            var calculatorService = new CalculatorService();
+
+            // Act
+            var result = calculatorService.Calculate(input);
+
+            // Assert
+            result.Should().Be(0);
+        }
     }
 }
