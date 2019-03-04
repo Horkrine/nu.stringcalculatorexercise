@@ -9,5 +9,9 @@ namespace NU.StringCalculatorExercise.Logic.Services
 {
     public class CalculatorService : ICalculatorService
     {
+        public int Calculate(string input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

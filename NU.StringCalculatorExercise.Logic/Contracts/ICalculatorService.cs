@@ -8,6 +8,6 @@ namespace NU.StringCalculatorExercise.Logic.Contracts
 {
     public interface ICalculatorService
     {
-
+        int Calculate(string input);
     }
 }
