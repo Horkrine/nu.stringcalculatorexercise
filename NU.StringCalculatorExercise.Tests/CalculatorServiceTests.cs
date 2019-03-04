@@ -41,5 +41,23 @@ namespace NU.StringCalculatorExercise.Tests
             // Assert
             result.Should().Be(0);
         }
+
+        [Theory]
+        [InlineData("1")]   // Single value
+        [InlineData("1,2")] // Two values
+        [InlineData("25,75")] // Two larger values
+        public void Should_ReturnSum_When_InputIsCommaSeparatedIntegers(string input)
+        {
+            // Arrange
+            var calculatorService = new CalculatorService();
+            var values = input.Split(',');
+            var sum = values.Sum(int.Parse);
+
+            // Act
+            var result = calculatorService.Calculate(input);
+
+            // Assert
+            result.Should().Be(sum);
+        }
     }
 }
