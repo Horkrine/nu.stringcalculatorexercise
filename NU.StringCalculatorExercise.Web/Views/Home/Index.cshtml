@@ -3,8 +3,27 @@
 }
 
 <div class="container">
-    <h3>String calculator</h3>
-    <p>A magnificent piece of kit, really. Looks dead good and that like. 5 star reviews al' ower the net!</p>
-    <br />
-    <i>"Aye it's canny like" ~The locals</i>
+    <form id="formStringCalculator" onsubmit="return calculate();">
+        <div class="form-group">
+            <label class="col-form-label" for="txt_input">Enter some numbers to calculate</label>
+            <input id="txt_input" class="form-control" type="text" onkeyup="return calculate();" />
+            <div class="invalid-feedback">Sorry. It doesn't look like that input was valid</div>
+        </div>
+        <div class="form-group">
+            <button id="btnCalculate" type="submit" class="btn btn-primary">Calculate</button>
+        </div>
+    </form>
 </div>
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        function calculate() {
+            return false;
+        }
+
+        function isNumber(data) {
+            return false;
+        }
+    </script>
+}

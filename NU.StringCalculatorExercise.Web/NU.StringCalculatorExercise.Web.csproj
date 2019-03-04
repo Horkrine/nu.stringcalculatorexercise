@@ -17,4 +17,8 @@
     <ProjectReference Include="..\NU.StringCalculatorExercise.Logic\NU.StringCalculatorExercise.Logic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
