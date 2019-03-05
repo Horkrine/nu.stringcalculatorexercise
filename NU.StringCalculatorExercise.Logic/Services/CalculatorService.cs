@@ -17,12 +17,12 @@ namespace NU.StringCalculatorExercise.Logic.Services
                 return 0;
             }
 
-            if (!Regex.IsMatch(input, "[0-9,]", RegexOptions.Compiled))
+            if (!Regex.IsMatch(input, @"^\d+(,\d+)*$", RegexOptions.Compiled))
             {
                 throw new Exception("Input must be a comma seperated list of integers");
             }
 
-            var values = input.Split(',');  // Split the values out
+            var values = input.Trim().Split(',');  // Split the values out
             var total = values.Sum(int.Parse);  // Parse each as an integer and then add them here
 
             return total;

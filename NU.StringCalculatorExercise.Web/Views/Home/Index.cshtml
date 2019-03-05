@@ -6,11 +6,14 @@
     <form id="formStringCalculator" onsubmit="return calculate();">
         <div class="form-group">
             <label class="col-form-label" for="txt_input">Enter some numbers to calculate</label>
-            <input id="txt_input" class="form-control" type="text" onkeyup="return calculate();" />
-            <div class="invalid-feedback">Sorry. It doesn't look like that input was valid</div>
+            <input id="txt_input" class="form-control" type="text" />
+            <div id="lbl_InvalidFeedback" class="invalid-feedback">Invalid input</div>
         </div>
         <div class="form-group">
             <button id="btnCalculate" type="submit" class="btn btn-primary">Calculate</button>
+        </div>
+        <div class="form-group">
+            <p id="lblSum"></p>
         </div>
     </form>
 </div>
@@ -19,10 +22,37 @@
     {
     <script type="text/javascript">
         function calculate() {
-            return false;
-        }
+            var model = {
+                'Values': $('#txt_input').val()
+            }
 
-        function isNumber(data) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '@Url.Action("Calculate", "Home")',
+                    cache: false,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    data: JSON.stringify(model),
+                    async: true,
+                    statusCode: {
+                        200: function (data) {
+                            console.log(data);
+                            $('#txt_input').removeClass('is-invalid');
+                            $('#txt_input').addClass('is-valid');
+                            $('#lblSum').html('Result is: ' + data.value.sum);
+                        },
+                        400: function (data) {
+                            console.log(data.responseJSON);
+                            $('#txt_input').removeClass('is-valid');
+                            $('#txt_input').addClass('is-invalid');
+                            $('#lblSum').html('');
+                            $('#lbl_InvalidFeedback').html(data.responseJSON.message);
+                            console.log("An error occured: " + data.responseJSON.message);
+                        }
+                    }
+                });
+
             return false;
         }
     </script>

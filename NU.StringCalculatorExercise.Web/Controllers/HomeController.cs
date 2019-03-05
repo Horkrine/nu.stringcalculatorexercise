@@ -24,11 +24,17 @@ namespace NU.StringCalculatorExercise.Web.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Calculate([FromBody] CalculatorInputViewModel data)
         {
-            if (!Regex.IsMatch(data.Values, "[0-9,]", RegexOptions.Compiled))
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Please enter only a list of numbers separated by commas");
+                return BadRequest(new { message = "Invalid state. Please refresh the page and try again" });
+            }
+
+            if (data?.Values == null || !Regex.IsMatch(data.Values, @"^\d+(,\d+)*$", RegexOptions.Compiled))
+            {
+                return BadRequest(new { message = "Please enter only a list of numbers separated by commas" });
             }
 
             var total = _calculatorService.Calculate(data.Values);
